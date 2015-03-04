@@ -1,0 +1,6 @@
+{
+	"args":{
+		"spool":"/tmp/worker_2"
+	},
+	"type":"process"
+}

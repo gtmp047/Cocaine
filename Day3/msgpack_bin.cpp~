@@ -1,0 +1,50 @@
+#include <iostream>
+#include <fstream>
+#include <algorithm>
+#include <iterator>
+#include <map>
+#include <string>
+#include <msgpack.hpp>
+
+int main(int argc , char** argv ){
+
+	
+	/*std::make_pair("a",1))
+	std::make_pair("b","test");*/
+	std::fstream myfile;
+	myfile.open ("out");
+	msgpack::sbuffer buff;
+	
+
+	if (argc > 2){
+		return -1;
+	}
+
+	if (std::string(argv[1]).compare("pack") == 0){
+		
+		msgpack::packer<msgpack::sbuffer> packers(&buff);
+		packers.pack_map(2);
+		packers.pack(std::string("a"));
+		packers.pack(1);
+		packers.pack(std::string("b"));
+		packers.pack(std::string("test"));
+		
+		std::copy(buff.data(),buff.data()+buff.size(),std::ostreambuf_iterator<char>(myfile));
+	}
+	else if (std::string(argv[1]).compare("unpack") == 0){
+
+		msgpack::unpacked unpacks;
+		msgpack::unpack(&unpacks,buff.data(),buff.size());
+		msgpack::object obj(unpacks.get());
+
+		for (auto  i = 0; i < object.via.map.size; ++i)
+		{
+			std::cout << (obj.via.map.ptr+i)->key << "   "<<(obj.via.map.ptr+i)->value<<std::endl;
+		}
+	}
+	else {
+		return -1;
+	}
+
+
+}

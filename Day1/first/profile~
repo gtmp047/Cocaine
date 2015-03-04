@@ -1,0 +1,6 @@
+{
+	"args":{
+		"spool":"/tmp/worker16_02_2015"
+	},
+	"type":"process"
+}
